@@ -8,33 +8,20 @@
 #
 
 library(shiny)
+s1 <- withMathJax("$$\\bar{X_{n}}$$")
 
-# Define UI for application that draws a histogram
 shinyUI(fluidPage(
-  tags$style(HTML(".radio {
-                    padding-top: 5%;
-                  }
-                  .control-label{
-                    height: 5%;
-                  }
-                  html, body{
-                    height:100%;
-                  }")),
-  h2("Muestreo en poblaciones normales", style="height:500%"),
-  h6(withMathJax("$$\\bar{X_{n}}$$"), style="position:absolute; top:8.5%;left:11%"),
-  h6(withMathJax("$$\\frac{\\bar{X_{n}} - \\mu}{\\sigma/\\sqrt{n}}$$"), style="position:absolute; top:11%; left:11%"),
-  h6(withMathJax("$$\\frac{(n - 1)s^{2}}{\\sigma^{2}}$$"), style="position:absolute; top:16%; left:11%;"),
-  h6(withMathJax("$$\\frac{\\bar{X_{n}} - \\mu}{S_{n}/\\sqrt{n}}$$"), style="position:absolute; top:20%; left:11%"),
-  radioButtons("inRadio", "Selecciona una distribución muestral: ", c("Distribución muestral de " = "distrib3",
-                  "Distribución muestral de " = "distrib4",
-                    "Distribución muestral de " = "distrib2",
-                      "Distribucion muestral de " = "distrib1")
-  ),
-  
+  titlePanel("Muestreo en poblaciones normales"),
+  withMathJax(radioButtons("inRadio", "Selecciona una distribución muestral: ",
+                  choiceNames = c("Distribución muestral de$$\\bar{X_{n}}$$",
+                  "Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{\\sigma/\\sqrt{n}}$$", 
+                  "Distribución muestral de $$\\frac{(n - 1)s^{2}}{\\sigma^{2}}$$", 
+                  "Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{S_{n}/\\sqrt{n}}$$"),
+                   choiceValues = c("distrib3", "distrib4", "distrib2", "distrib1")
+  )),
   sidebarLayout(
     conditionalPanel(
       "input.inRadio == 'distrib2'",
-      style="padding-top:50px;",
       sidebarPanel(
         h2("Estimación de la varianza"),
         radioButtons("n", "Número de muestras:",
@@ -61,18 +48,16 @@ shinyUI(fluidPage(
     conditionalPanel(
       "input.inRadio=='distrib2'",
       mainPanel(
-        img(src="var.png", style="text-align:center;"),
+        h1(withMathJax("Distribución muestral de $$\\frac{(n - 1)s^{2}}{\\sigma^{2}}$$"),
+           style="text-align:center;"),
         h2("Distribución Ji-Cuadrada", style="color:green; text-align:center;"),
          plotOutput("distPlot"),
         style="width:50%;position:absolute;top:0%;left:35%;"
-        
-         #plotOutput("distPlotT")
       )
     )
   ),
   sidebarLayout(
     conditionalPanel(
-      style="padding-top:50px;",
       "input.inRadio=='distrib1'|| input.inRadio == 'distrib3' || input.inRadio=='distrib4'",
       sidebarPanel(
         h2("Estimación de la media"),
@@ -100,7 +85,8 @@ shinyUI(fluidPage(
     conditionalPanel(
       "input.inRadio == 'distrib1'",
       mainPanel(
-        img(src="media.png", style="text-align:center;"),
+        h1(withMathJax("Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{S_{n}/\\sqrt{n}}$$"),
+           style="text-align:center;"),
         h2("Distribución t-Student", style="text-align:center;color:blue"),
         plotOutput("meanPlot"), style="width:50%; position:absolute;top:0%; left:35%"
       )
@@ -109,7 +95,8 @@ shinyUI(fluidPage(
     conditionalPanel(
       "input.inRadio == 'distrib3'",
       mainPanel(
-        img(src="mean.png", style="text-align:center;"),
+        h1(withMathJax("Distribución muestral de $$\\bar{X_{n}}$$"),
+           style="text-align:center;"),
         h2("Distribución normal", style="text-align:center;color:orange;"),
         plotOutput("mean2Plot"), style="width:50%;position:absolute;top: 0%;left:35%"
       )
@@ -117,11 +104,12 @@ shinyUI(fluidPage(
   conditionalPanel(
     "input.inRadio == 'distrib4'",
     mainPanel(
-      h3(withMathJax("Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{\\sigma/\\sqrt{n}}$$")),
+      h1(withMathJax("Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{\\sigma/\\sqrt{n}}$$"),
+         style="text-align:center;"),
       h2("Distribución normal estándar", style="text-align:center;color:orange;"),
       plotOutput("mean3Plot"), style="width:50%;position:absolute;top: 0%;left:35%"
     )
   )
-  )
+ )
   
 )

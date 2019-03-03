@@ -14,7 +14,9 @@ library(shiny)
 #
 #
 #
+
 shinyServer(function(input, output) {
+  #Para la Ji-Cuadrada
   output$distPlot <- renderPlot({
     #$n es el numero de muestras; $m es el tamano de la muestra
     radioButton = input$n
@@ -49,13 +51,14 @@ shinyServer(function(input, output) {
     axis(side=1, col.axis= "green", col.ticks = "green", line=2)
   
     par(mfg = c(2,1))
-    x <- seq(media - 2 * var, media + 2 * var, length = 3000)
+    x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
     plot(x, y, pch=2, ylab = "", main = "Población madre (normal)", xlab="")
+    parametro <- sd(varMuestrales)
   }, height = 800)
   
 
-  
+  #Para la t-student:
   output$meanPlot <- renderPlot({
     radioButton = input$n2
     if(radioButton=="cinc"){
@@ -92,11 +95,12 @@ shinyServer(function(input, output) {
     plot(z,y,col="blue", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(min(mediasMuestrales)-0.5,max(mediasMuestrales)+0.5))
     axis(side=1, col.axis= "blue", col.ticks = "blue", line=2)
     par(mfg = c(2,1))
-    x <- seq(media - 2 * var, media + 2 * var, length = 3000)
+    x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
     plot(x, y, pch=2, ylab = "", main = "Población madre (normal)", xlab="")
   }, height = 800)
   
+  #para la media muestral
   output$mean2Plot <-renderPlot({
     radioButton = input$n2
     if(radioButton=="cinc"){
@@ -123,20 +127,21 @@ shinyServer(function(input, output) {
     }
     par(mfrow = c(2,1))
     par(mfg = c(1,1))
-    x<-seq(media-2*var,media+2*var, length = 2000)
+    x<-seq(media-1-var/10,media+1+var/10, length.out = 2000)
     y<-rnorm(2000, media, sqrt(var)/sqrt(m))
     
-    hist(mediasMuestrales,prob=TRUE,xlab="", xlim = c(media-sqrt(m)/3-var/5,media+sqrt(m)/3+var/5), ylab="", main="")
+    hist(mediasMuestrales,prob=TRUE,xlab="", xlim = c(media - 1 - var/10, media + 1 + var/10), ylab="", main="")
     par(new = T)
-    a<-seq(-5+media,5+media,length=2000)
+    a<-seq(media - 1 - var/10, media + 1 + var/10,length=2000)
     b<-dnorm(a, mean = media, sd=sqrt(var)/sqrt(m))
-    plot(a,b,col="orange", xlab = "", ylab = "", "lwd" =1,  xaxt="n", yaxt="n", xlim = c(media-sqrt(m)/3-var/5,media+sqrt(m)/3+var/5))
+    plot(a,b,col="orange", xlab = "", ylab = "", "lwd" =1,  xaxt="n", yaxt="n", xlim = c(media - 1 - var/10, media + 1 + var/10))
     axis(side=1, col.axis= "orange", col.ticks = "orange", line=2)
     par(mfg = c(2,1))
-    x <- seq(media - 2 * var, media + 2 * var, length = 3000)
+    x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
     plot(x, y, pch=2, ylab = "", main = "Población madre (normal)", xlab="")
   }, height = 800)
+  #Para la x-t/sigma/raiz(n)
   output$mean3Plot <-renderPlot({
     radioButton = input$n2
     if(radioButton=="cinc"){
@@ -170,10 +175,10 @@ shinyServer(function(input, output) {
     hist(mediasMuestrales, prob = TRUE, xlab = "", main="", ylab = "")
     #hist(density(mediasMuestrales),type="l","lwd"=1, xlab = "x",prob = TRUE,  ylab = "Medias muestrales", main = "Medias muestrales y t-Student")
     par(new = T)
-    plot(z,y,col="orange", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(min(mediasMuestrales)-0.5,max(mediasMuestrales)+0.5))
-    axis(side=1, col.axis= "orange", col.ticks = "orange", line=2)
+    plot(z,y,col="pink", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(min(mediasMuestrales)-0.5,max(mediasMuestrales)+0.5))
+    axis(side=1, col.axis= "pink", col.ticks = "pink", line=2)
     par(mfg = c(2,1))
-    x <- seq(media - 2 * var, media + 2 * var, length = 3000)
+    x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
     plot(x, y, pch=2, main = "Población madre (normal)", xlab="", ylab = "")
     
