@@ -44,16 +44,17 @@ shinyServer(function(input, output) {
     par(mfg = c(1,1))
     z<- seq(0,2*m, length = 3000)
     y<- dchisq(z, m-1)
-    hist(varMuestrales, prob = TRUE, xlab = "", main="", ylab = "")
+    hist(varMuestrales, prob = TRUE, xlab = "", main="", ylab = "", xlim = c(-3 * sqrt(m) + m, 3 * sqrt(m) + m))
     #hist(density(mediasMuestrales),type="l","lwd"=1, xlab = "x",prob = TRUE,  ylab = "Medias muestrales", main = "Medias muestrales y t-Student")
     par(new = T)
-    plot(z,y,col="green", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(min(varMuestrales)-0.5,max(varMuestrales)+0.5), pch=1)
-    axis(side=1, col.axis= "green", col.ticks = "green", line=2)
+    #    VERDE
+    plot(z,y,col="#32CD32", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(-3 * sqrt(m) + m, 3 * sqrt(m) + m))
+    axis(side=1, col.axis= "#32CD32", col.ticks = "#32CD32", line=2)
   
     par(mfg = c(2,1))
     x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
-    plot(x, y, pch=2, ylab = "", main = "Población madre (normal)", xlab="")
+    plot(x, y, ylab = "", main = "Distribución normal (población madre o población muestreada)", xlab="")
     parametro <- sd(varMuestrales)
   }, height = 800)
   
@@ -97,7 +98,7 @@ shinyServer(function(input, output) {
     par(mfg = c(2,1))
     x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
-    plot(x, y, pch=2, ylab = "", main = "Población madre (normal)", xlab="")
+    plot(x, y, pch=2, ylab = "", main = "Distribución normal (población madre o población muestreada)", xlab="")
   }, height = 800)
   
   #para la media muestral
@@ -139,7 +140,7 @@ shinyServer(function(input, output) {
     par(mfg = c(2,1))
     x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
-    plot(x, y, pch=2, ylab = "", main = "Población madre (normal)", xlab="")
+    plot(x, y, pch=2, ylab = "", main = "Distribución normal (población madre o población muestreada)", xlab="")
   }, height = 800)
   #Para la x-t/sigma/raiz(n)
   output$mean3Plot <-renderPlot({
@@ -175,12 +176,12 @@ shinyServer(function(input, output) {
     hist(mediasMuestrales, prob = TRUE, xlab = "", main="", ylab = "")
     #hist(density(mediasMuestrales),type="l","lwd"=1, xlab = "x",prob = TRUE,  ylab = "Medias muestrales", main = "Medias muestrales y t-Student")
     par(new = T)
-    plot(z,y,col="pink", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(min(mediasMuestrales)-0.5,max(mediasMuestrales)+0.5))
-    axis(side=1, col.axis= "pink", col.ticks = "pink", line=2)
+    plot(z,y,col="#FF69B4", xlab = "", ylab = "", "lwd" =1, yaxt="n",xaxt="n", xlim = c(min(mediasMuestrales)-0.5,max(mediasMuestrales)+0.5))
+    axis(side=1, col.axis= "#FF69B4", col.ticks = "#FF69B4", line=2)
     par(mfg = c(2,1))
     x <- seq(media - 2 * var, media + 2 * var, length = 500)
     y <- dnorm(x, media, var)
-    plot(x, y, pch=2, main = "Población madre (normal)", xlab="", ylab = "")
+    plot(x, y, pch=2, main = "Distribución normal (población madre o población muestreada)", xlab="", ylab = "")
     
   }, height = 800)
   

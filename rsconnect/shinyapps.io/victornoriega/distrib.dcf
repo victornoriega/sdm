@@ -5,6 +5,6 @@ account: victornoriega
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 332819
-bundleId: 1911760
+bundleId: 1918348
 url: https://victornoriega.shinyapps.io/distrib/
-when: 1551590294.92299
+when: 1551827366.8427

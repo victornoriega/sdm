@@ -15,7 +15,7 @@ shinyUI(fluidPage(
   withMathJax(radioButtons("inRadio", "Selecciona una distribución muestral: ",
                   choiceNames = c("Distribución muestral de$$\\bar{X_{n}}$$",
                   "Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{\\sigma/\\sqrt{n}}$$", 
-                  "Distribución muestral de $$\\frac{(n - 1)s^{2}}{\\sigma^{2}}$$", 
+                  "Distribución muestral de $$\\frac{(n - 1)S^{2}}{\\sigma^{2}}$$", 
                   "Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{S_{n}/\\sqrt{n}}$$"),
                    choiceValues = c("distrib3", "distrib4", "distrib2", "distrib1")
   )),
@@ -48,9 +48,9 @@ shinyUI(fluidPage(
     conditionalPanel(
       "input.inRadio=='distrib2'",
       mainPanel(
-        h1(withMathJax("Distribución muestral de $$\\frac{(n - 1)s^{2}}{\\sigma^{2}}$$"),
+        h1(withMathJax("Distribución muestral de $$\\frac{(n - 1)S^{2}}{\\sigma^{2}}$$"),
            style="text-align:center;"),
-        h2("Distribución Ji-Cuadrada", style="color:green; text-align:center;"),
+        h2("Distribución Ji-Cuadrada", style="color:#32CD32; text-align:center;"),
          plotOutput("distPlot"),
         style="width:50%;position:absolute;top:0%;left:35%;"
       )
@@ -106,7 +106,7 @@ shinyUI(fluidPage(
     mainPanel(
       h1(withMathJax("Distribución muestral de $$\\frac{\\bar{X_{n}} - \\mu}{\\sigma/\\sqrt{n}}$$"),
          style="text-align:center;"),
-      h2("Distribución normal estándar", style="text-align:center;color:orange;"),
+      h2("Distribución normal estándar", style="text-align:center;color:#FF69B4;"),
       plotOutput("mean3Plot"), style="width:50%;position:absolute;top: 0%;left:35%"
     )
   )
